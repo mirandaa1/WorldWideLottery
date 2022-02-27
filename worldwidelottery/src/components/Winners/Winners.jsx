@@ -15,23 +15,23 @@ function Winners() {
     <div className="winners">
       <div className="winners__container">
         <h2>Winners</h2>
-        {winners.map((w, index) => (
+        {/*  */}
+        {winners.map((winners, index) => (
           <WinnerUser
-            key={index}
-            picture={w.picture.thumbnail}
-            title={w.name.title}
-            firstName={w.name.first}
-            lastName={w.name.last}
-            email={w.email}
-            gender={w.gender === "male" ? "M" : "F"}
-            phoneNumber={w.phone}
-            cell={w.cell}
-            city={w.location.city}
-            country={w.location.country}
-            postcode={w.location.postcode}
-            nationality={w.nat}
+            picture={winners?.picture}
+            firstName={winners?.fullName}
+            gender={winners?.gender}
+            email={winners?.email}
+            age={winners?.age}
+            phoneNumber={winners?.phone}
+            cell={winners?.cell}
+            city={winners?.location?.city}
+            country={winners?.location?.country}
+            postcode={winners?.location?.postcode}
+            nationality={winners?.nat}
           />
         ))}
+
         <div className="winners__container-sort">
           <button>Sort</button>
         </div>

@@ -3,11 +3,11 @@ import "./WinnerUser.scss";
 
 function WinnerUser({
   picture,
-  title,
+  age,
   firstName,
+  gender,
   lastName,
   email,
-  gender,
   phoneNumber,
   cell,
   city,
@@ -19,10 +19,8 @@ function WinnerUser({
     <div>
       <img style={{ width: "60px", height: "60px" }} src={picture} alt="" />
       <div>
-        <p>{title}</p>
-
         <p>{firstName}</p>
-
+        <p>{age}</p>
         <p>{lastName}</p>
       </div>
 

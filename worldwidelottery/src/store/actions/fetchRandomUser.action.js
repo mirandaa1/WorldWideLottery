@@ -5,10 +5,24 @@ export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
 export const FETCH_USER_FAIL = "FETCH_USER_FAIL";
 
 export const GROUP_WINNERS = "GROUP_WINNERS";
+export const SESSION_PLAYERS = "SESSION_PLAYERS";
+export const STATS_PLAYERS = "STATS_PLAYERS";
 
 export const groupWinners = (winner) => {
   return (dispatch) => {
     dispatch({ type: GROUP_WINNERS, payload: winner });
+  };
+};
+
+export const getStatsPlayers = (player) => {
+  return (dispatch) => {
+    dispatch({ type: FETCH_USER });
+    dispatch({ type: STATS_PLAYERS });
+  };
+};
+export const sessionPlayers = (player) => {
+  return (dispatch) => {
+    dispatch({ type: SESSION_PLAYERS, payload: player });
   };
 };
 

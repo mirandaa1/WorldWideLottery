@@ -4,60 +4,53 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getUser,
   groupWinners,
+  sessionPlayers,
 } from "../../store/actions/fetchRandomUser.action";
 import User from "../User/User";
 
 function Home() {
   const dispatch = useDispatch();
   const [winnerGame, setWinnerGame] = useState(false);
-  const [arrayOfWinners, setArrayOfWinners] = useState([]);
 
-  const { user, userDetails, isLoading, randomNumber } = useSelector(
+  const { user, sessionPlayersArray, isLoading, randomNumber } = useSelector(
     (state) => state.userReducer
   );
 
   const fetchUser = () => {
-    console.log("IS LOADING", isLoading);
     dispatch(getUser());
-    console.log("user", user);
   };
 
   useEffect(() => {
-    user.results?.map((u, i) => {
-      if (randomNumber === u.registered?.age) {
-        setWinnerGame(true);
-        setArrayOfWinners((arrayOfWinners) => [...arrayOfWinners, user]);
-        dispatch(groupWinners(u));
-      } else {
-        setWinnerGame(false);
-        dispatch(groupWinners(u));
-      }
-    });
-  }, [user]);
+    if (randomNumber === null) return;
+    let random = Math.floor(Math.random() * 10) + 1;
+    if (random === user?.age) {
+      setWinnerGame(true);
+      dispatch(groupWinners({ ...user, isWinner: true }));
+    } else {
+      setWinnerGame(false);
+      dispatch(groupWinners({ ...user, isWinner: false }));
+    }
+  }, [randomNumber]);
 
-  console.log(arrayOfWinners);
   return (
     <div className="home">
       <div className="home__generatedUser">
-        <button onClick={fetchUser}>Generate User</button>
+        <button onClick={(e) => fetchUser()}>Generate User</button>
         <div className="generatedUserDetails">
-          {user.results?.map((u, index) => (
-            <User
-              key={index}
-              picture={u.picture.thumbnail}
-              title={u.name.title}
-              firstName={u.name.first}
-              lastName={u.name.last}
-              email={u.email}
-              gender={u.gender === "male" ? "M" : "F"}
-              phoneNumber={u.phone}
-              cell={u.cell}
-              city={u.location.city}
-              country={u.location.country}
-              postcode={u.location.postcode}
-              nationality={u.nat}
-            />
-          ))}
+          {/* {user.results?.map((u, index) => ( */}
+          <User
+            picture={user?.picture}
+            firstName={user?.fullName}
+            gender={user?.gender}
+            email={user?.email}
+            age={user?.age}
+            phoneNumber={user?.phone}
+            cell={user?.cell}
+            city={user?.location?.city}
+            country={user?.location?.country}
+            postcode={user?.location?.postcode}
+            nationality={user?.nat}
+          />
         </div>
       </div>
     </div>

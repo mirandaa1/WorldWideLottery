@@ -10,19 +10,13 @@ function User({
   gender,
   phoneNumber,
   cell,
-  city,
-  country,
-  postcode,
   nationality,
 }) {
   return (
     <div className="user">
       <img style={{ width: "60px", height: "60px" }} src={picture} alt="" />
       <div className="user__title">
-        <p>{title}</p>
-
         <p>{firstName}</p>
-
         <p>{lastName}</p>
       </div>
 
@@ -32,11 +26,7 @@ function User({
         <p>{phoneNumber}</p>
         <p>{cell}</p>
       </div>
-      <div className="user__location">
-        <p>{city}</p>
-        <p>{country}</p>
-        <p>{postcode}</p>
-      </div>
+      <div className="user__location"></div>
       <p>{nationality}</p>
     </div>
   );

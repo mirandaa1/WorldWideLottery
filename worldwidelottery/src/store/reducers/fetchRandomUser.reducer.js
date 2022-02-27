@@ -2,13 +2,17 @@ import {
   FETCH_USER,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAIL,
+  STATS_PLAYERS,
   GROUP_WINNERS,
+  SESSION_PLAYERS,
 } from "../actions/fetchRandomUser.action";
 
 const INITIAL_STATE = {
   user: {},
   winners: [],
+  statsPlayers: [],
   sortWinnersByTime: [],
+  sessionPlayersArray: [],
   isLoading: true,
   errorMessage: "",
   randomNumber: null,
@@ -23,22 +27,55 @@ const user = (state = INITIAL_STATE, action) => {
         errorMessage: "",
       };
     }
-
     case GROUP_WINNERS: {
-      state.winners.unshift(action.payload);
+      let newWinner = action.payload;
+
+      if (state.winners.length) {
+        let foundIndex = state.winners.findIndex(
+          (winner) => winner.id === newWinner.id
+        );
+        if (foundIndex > -1) {
+          state.winners[foundIndex].timesPlayed =
+            state.winners[foundIndex].timesPlayed + 1;
+        } else {
+          state.winners.unshift({ ...action.payload, timesPlayed: 1 });
+        }
+      } else {
+        state.winners.unshift({ ...action.payload, timesPlayed: 1 });
+      }
+
+      let playerNational = state.winners.map((winner) => {
+        return {
+          nationality: winner.location.country,
+          numberOfPlayers: winner.timesPlayed,
+        };
+      });
+
+      return { ...state, statsPlayers: [...playerNational] };
+    }
+    case SESSION_PLAYERS: {
+      state.sessionPlayersArray.unshift(action.payload);
       return { ...state };
     }
+
     case FETCH_USER_SUCCESS: {
-      console.log(state.userDetails);
-      action.payload.results.map((u, i) => {
-        if (u.registered.age === state.randomNumber) {
-          console.log("WINNER WITH AGEE");
-        }
-      });
+      let newUser = action.payload.results[0];
+
+      state.user.id = newUser.id.value;
+      state.user.fullName = newUser.name.first + "  " + newUser.name.last;
+      state.user.picture = newUser.picture.thumbnail;
+      state.user.email = newUser.email;
+      state.user.gender = newUser.gender === "male" ? "M" : "F";
+      state.user.email = newUser.email;
+      state.user.cell = newUser.cell;
+      state.user.phone = newUser.cell;
+      state.user.location = newUser.location;
+      state.user.age = newUser.dob.age;
+      state.user.nat = newUser.nat;
+
       return {
         ...state,
         errorMessage: "",
-        user: { ...action.payload },
         randomNumber: Math.floor(Math.random() * 10) + 1,
       };
     }
