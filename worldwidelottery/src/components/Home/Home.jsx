@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../store/actions/fetchRandomUser.action";
+import {
+  getUser,
+  groupWinners,
+} from "../../store/actions/fetchRandomUser.action";
 import User from "../User/User";
 
 function Home() {
@@ -16,6 +19,7 @@ function Home() {
   const fetchUser = () => {
     console.log("IS LOADING", isLoading);
     dispatch(getUser());
+    console.log("user", user);
   };
 
   useEffect(() => {
@@ -23,10 +27,10 @@ function Home() {
       if (randomNumber === u.registered?.age) {
         setWinnerGame(true);
         setArrayOfWinners((arrayOfWinners) => [...arrayOfWinners, user]);
-        console.log("WINNER");
+        dispatch(groupWinners(u));
       } else {
         setWinnerGame(false);
-        console.log("NOT WINNER");
+        dispatch(groupWinners(u));
       }
     });
   }, [user]);

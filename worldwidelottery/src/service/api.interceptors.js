@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://randomuser.me/api?page=%7BpageIndex%7D";
+const BASE_URL = "https://randomuser.me/api?";
 let api = axios.create({
   baseURL: BASE_URL,
   "content-type": "application/json",

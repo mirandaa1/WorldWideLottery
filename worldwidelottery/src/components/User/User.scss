@@ -1,0 +1,28 @@
+.user {
+  display: flex;
+  padding: 40px 20px;
+  width: 500px;
+
+  justify-content: center;
+  margin-top: 50px;
+  flex-direction: column;
+  align-items: center;
+  height: max-content;
+  background-color: lightblue;
+  &__title {
+    display: flex;
+    justify-content: center;
+    width: max-content;
+  }
+  &__location {
+    display: flex;
+    justify-content: center;
+    width: max-content;
+  }
+  &__phoneNumber {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: max-content;
+  }
+}

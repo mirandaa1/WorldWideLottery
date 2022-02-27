@@ -1,7 +1,7 @@
 import React from "react";
-import "./User.scss";
+import "./WinnerUser.scss";
 
-function User({
+function WinnerUser({
   picture,
   title,
   firstName,
@@ -16,9 +16,9 @@ function User({
   nationality,
 }) {
   return (
-    <div className="user">
+    <div>
       <img style={{ width: "60px", height: "60px" }} src={picture} alt="" />
-      <div className="user__title">
+      <div>
         <p>{title}</p>
 
         <p>{firstName}</p>
@@ -28,11 +28,11 @@ function User({
 
       <p>{email}</p>
       <p>{gender}</p>
-      <div className="user__phoneNumber">
+      <div>
         <p>{phoneNumber}</p>
         <p>{cell}</p>
       </div>
-      <div className="user__location">
+      <div>
         <p>{city}</p>
         <p>{country}</p>
         <p>{postcode}</p>
@@ -42,4 +42,4 @@ function User({
   );
 }
 
-export default User;
+export default WinnerUser;
