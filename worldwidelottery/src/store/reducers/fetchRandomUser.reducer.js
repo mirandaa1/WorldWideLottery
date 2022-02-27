@@ -82,7 +82,7 @@ const user = (state = INITIAL_STATE, action) => {
       let newUser = action.payload.results[0];
 
       state.user.id = newUser.id.value;
-      state.user.fullName = newUser.name.first + "  " + newUser.name.last;
+      state.user.fullName = newUser.name.first + " " + newUser.name.last;
       state.user.picture = newUser.picture.thumbnail;
       state.user.email = newUser.email;
       state.user.gender = newUser.gender === "male" ? "M" : "F";

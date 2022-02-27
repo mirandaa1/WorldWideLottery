@@ -43,7 +43,7 @@ function Home() {
         <button onClick={(e) => fetchUser()}>Generate User</button>
         <div className="generatedUserDetails">
           {/* {user.results?.map((u, index) => ( */}
-          {user === {} ? (
+          {user === null ? (
             "Empty User"
           ) : (
             <User

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { getStatsPlayers } from "../../store/actions/fetchRandomUser.action";
 import { useDispatch, useSelector } from "react-redux";
+import "./Stats.scss";
 
 const Stats = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,9 @@ const Stats = () => {
           return "";
         } else {
           return (
-            <div className="sessionPlayer">
-              <h1>{player?.nationality}</h1>
-              <h1>{player?.numberOfPlayers}</h1>
+            <div className="stats">
+              <h2> Nationality : {player?.nationality}</h2>
+              <h2> Number Of Players : {player?.numberOfPlayers}</h2>
             </div>
           );
         }

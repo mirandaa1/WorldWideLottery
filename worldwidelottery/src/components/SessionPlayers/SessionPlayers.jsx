@@ -33,7 +33,7 @@ function SessionPlayers() {
           {sessionPlayersArray.map((w, index) => (
             <div
               className="sessionPlayer"
-              style={{ background: winnerGame ? "green" : "red" }}
+              style={{ background: winnerGame ? "lightblue" : "#dbd8d8" }}
             >
               <img src={w?.picture} alt="" />
               <p>{w?.fullName}</p>

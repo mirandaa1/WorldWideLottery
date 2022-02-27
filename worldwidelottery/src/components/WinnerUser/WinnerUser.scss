@@ -3,5 +3,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: lightcoral;
+  background-color: lightblue;
+  button {
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: lightgray;
+    border: none;
+    outline: none;
+  }
 }

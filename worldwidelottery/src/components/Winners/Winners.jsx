@@ -31,10 +31,6 @@ function Winners() {
             nationality={winners?.nat}
           />
         ))}
-
-        <div className="winners__container-sort">
-          <button>Sort</button>
-        </div>
       </div>
     </div>
   );

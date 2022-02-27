@@ -1,5 +1,6 @@
 import React from "react";
 import "./User.scss";
+import PhoneIcon from "@material-ui/icons/Phone";
 
 function User({
   picture,
@@ -19,22 +20,43 @@ function User({
     <div className="user">
       <img style={{ width: "60px", height: "60px" }} src={picture} alt="" />
       <div className="user__title">
-        <p>{title}</p>
         <p>{firstName}</p>
         <p>{lastName}</p>
       </div>
 
-      <p>{email}</p>
-      <p>{gender}</p>
+      <p>
+        {" "}
+        <b>Email</b> : {email}
+      </p>
+      <p>
+        <b>Gender</b> : {gender}
+      </p>
       <div className="user__phoneNumber">
-        <p>{phoneNumber}</p>
-        <p>{cell}</p>
+        <p>
+          <b>Phone</b> : {phoneNumber}
+        </p>
+        <p>
+          {" "}
+          <b>Cell</b> : {cell}
+        </p>
       </div>
       <div className="user__location"></div>
-      <p>{nationality}</p>
-      <p>{country}</p>
-      <p>{city}</p>
-      <p>{postcode}</p>
+      <p>
+        {" "}
+        <b>Nationality</b> : {nationality}
+      </p>
+      <p>
+        {" "}
+        <b>Country</b> : {country}
+      </p>
+      <p>
+        {" "}
+        <b>City</b> : {city}
+      </p>
+      <p>
+        {" "}
+        <b>Postcode</b> : {postcode}
+      </p>
     </div>
   );
 }
