@@ -1,29 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "./SessionPlayers.scss";
 import WinnerUser from "../WinnerUser/WinnerUser";
 import { useDispatch, useSelector } from "react-redux";
+import { sessionPlayers } from "../../store/actions/fetchRandomUser.action";
 
 function SessionPlayers() {
-  const { sessionPlayersArray } = useSelector((state) => state.userReducer);
+  const [winnerGame, setWinnerGame] = useState(false);
+  const dispatch = useDispatch();
+  const { user, sessionPlayersArray, randomNumber } = useSelector(
+    (state) => state.userReducer
+  );
+  console.log(sessionPlayersArray, "sessionPlayersArray");
 
+  useEffect(() => {
+    if (randomNumber === user?.age) {
+      setWinnerGame(true);
+      dispatch(sessionPlayers({ ...user, isWinner: winnerGame }));
+    } else {
+      setWinnerGame(false);
+    }
+  }, [randomNumber]);
+
+  useEffect(() => {
+    dispatch(sessionPlayers({ ...user, isWinner: winnerGame }));
+  }, []);
   return (
     <div>
-      {sessionPlayersArray.map((w, index) => (
-        <WinnerUser
-          key={index}
-          picture={w.picture.thumbnail}
-          title={w.name.title}
-          firstName={w.name.first}
-          lastName={w.name.last}
-          email={w.email}
-          gender={w.gender === "male" ? "M" : "F"}
-          phoneNumber={w.phone}
-          cell={w.cell}
-          city={w.location.city}
-          country={w.location.country}
-          postcode={w.location.postcode}
-          nationality={w.nat}
-        />
-      ))}
+      {sessionPlayersArray.length === 0 ? (
+        "No players"
+      ) : (
+        <>
+          {sessionPlayersArray.map((w, index) => (
+            <div
+              className="sessionPlayer"
+              style={{ background: winnerGame ? "green" : "red" }}
+            >
+              <img src={w?.picture} alt="" />
+              <p>{w?.fullName}</p>
+              <p>{w?.cell}</p>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 }

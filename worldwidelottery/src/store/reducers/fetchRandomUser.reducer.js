@@ -5,6 +5,7 @@ import {
   STATS_PLAYERS,
   GROUP_WINNERS,
   SESSION_PLAYERS,
+  CLEAR_SESSION,
 } from "../actions/fetchRandomUser.action";
 
 const INITIAL_STATE = {
@@ -20,6 +21,18 @@ const INITIAL_STATE = {
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case CLEAR_SESSION: {
+      return {
+        user: {},
+        winners: [],
+        statsPlayers: [],
+        sortWinnersByTime: [],
+        sessionPlayersArray: [],
+        isLoading: false,
+        errorMessage: "",
+        randomNumber: null,
+      };
+    }
     case FETCH_USER: {
       return {
         ...state,
@@ -54,7 +67,14 @@ const user = (state = INITIAL_STATE, action) => {
       return { ...state, statsPlayers: [...playerNational] };
     }
     case SESSION_PLAYERS: {
+      console.log("action", action?.payload);
       state.sessionPlayersArray.unshift(action.payload);
+      return { ...state };
+    }
+
+    case STATS_PLAYERS: {
+      console.log("action", action?.payload);
+      state.statsPlayers.unshift(action.payload);
       return { ...state };
     }
 
@@ -76,7 +96,7 @@ const user = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         errorMessage: "",
-        randomNumber: Math.floor(Math.random() * 10) + 1,
+        randomNumber: Math.floor(Math.random() * 100) + 1,
       };
     }
     case FETCH_USER_FAIL: {

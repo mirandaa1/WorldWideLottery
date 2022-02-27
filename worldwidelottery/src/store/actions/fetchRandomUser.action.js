@@ -7,10 +7,17 @@ export const FETCH_USER_FAIL = "FETCH_USER_FAIL";
 export const GROUP_WINNERS = "GROUP_WINNERS";
 export const SESSION_PLAYERS = "SESSION_PLAYERS";
 export const STATS_PLAYERS = "STATS_PLAYERS";
+export const CLEAR_SESSION = "CLEAR_SESSION";
 
 export const groupWinners = (winner) => {
   return (dispatch) => {
     dispatch({ type: GROUP_WINNERS, payload: winner });
+  };
+};
+
+export const clearSession = () => {
+  return (dispatch) => {
+    dispatch({ type: CLEAR_SESSION });
   };
 };
 
