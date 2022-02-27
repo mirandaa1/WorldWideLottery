@@ -23,10 +23,16 @@ const user = (state = INITIAL_STATE, action) => {
     case FETCH_USER_SUCCESS: {
       //   console.log("ACTION>PAYLOAD", action.payload.results.picture);
       console.log(state.userDetails);
-      console.log("RANDOM NUMBER", state. 
+      action.payload.results.map((u, i) => {
+        if (u.registered.age === state.randomNumber) {
+          console.log("WINNER WITH AGEE");
+        }
+      });
+      return {
+        ...state,
         errorMessage: "",
         user: { ...action.payload },
-        randomNumber: Math.floor(Math.random() * 100) + 1,
+        randomNumber: Math.floor(Math.random() * 10) + 1,
       };
     }
     case FETCH_USER_FAIL: {
